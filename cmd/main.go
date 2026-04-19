@@ -10,15 +10,18 @@ import (
 )
 
 func main() {
-	_, cancel := signal.NotifyContext(context.Background(),
+	ctx, cancel := signal.NotifyContext(context.Background(),
 		syscall.SIGINT,
 		syscall.SIGTERM,
 	)
 	defer cancel()
 
-	_, err := application.New()
+	app, err := application.New()
 	if err != nil {
 		log.Fatalf("Не удалось создать приложение: %v", err)
+	}
+	if err = app.Start(ctx); err != nil {
+		log.Fatalf("Не удалось запустить приложение: %v", err)
 	}
 
 }

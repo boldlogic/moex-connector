@@ -31,3 +31,5 @@ app.log
 # Editor/IDE
 # .idea/
 # .vscode/
+.obsidian
+moex-connector
